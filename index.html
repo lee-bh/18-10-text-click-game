@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		body{ width:900px; margin:auto; }
+		.textBubble{ height:25px; background:#ddd; border-radius:6px; position: relative;float:left;margin:5px;line-height: 25px; padding: 5px;}
+		.textBubble:hover{ background: green; color:white; cursor:pointer; }
+		#textContainer:after{ content: "";display: block; clear: both; }
+		#disp2{text-align: center; height:100px; line-height: 100px; border: 4px solid red;font-size:3em;background: red; color:white;margin-top: 30px;}
+		#disp{height:50px; text-align:center;  font-weight:bold; padding-top: 20px;}
+	</style>
+</head>
+	
+<body>
+	<div id="clock"></div>
+	<div id="disp"></div>
+	<div id="textBase"></div>
+	<div id="textContainer"></div>
+	<div id="disp2"></div>
+	
+ <script>
+ 	var text="주요 사립 대학이 수천억 원에 달하는 적립금을 보유하고도 장학금 등 용도에 맞는 사용은 하지 않는 것으로 드러났다. 대학적립금은 사립학교법상 연구비‧건축기금‧장학금 등의 정해진 용도에 따라 충당해 운용할 수 있는 돈이다. 그러나 자유한국당 김현아 의원실이 사학진흥재단으로부터 제출받은 191개 사립대학의 결산 자료에 따르면, 일부 대학은 적립금을 수천억원가량 비축하고도 5년간 정해진 용도로는 지출하지 않았다. 이외에도 다수의 사립 대학이 운용 목적에 맞는 적립금 인출을 전혀 하지 않았다. 최근 5년간 연구비 목적 적립금을 한 푼도 인출하지 않은 학교는 36곳에 달했으며, 건축비 목적 적립금 인출이 0원인 학교도 18곳이었다. 장학금 목적으로 쌓아둔 적립금을 5년간 전혀 인출하지 않은 학교는 15곳이었다.";
+
+ 	var p = text.split(" ");
+ 	var c = document.getElementById("textBase");
+ 	var displayText = "3글자단어를 찾아봐유";
+ 	var tNumber = 0;
+
+ 	for(var i=0; i < p.length; i++){
+ 		var d = c.cloneNode(true);
+
+ 		if(p[i].length == 3){ tNumber++; };
+
+ 		d.innerHTML = p[i];
+ 		d.className = "textBubble";
+ 		d.id = "a" + i;
+ 		d.onclick = function(){
+ 			if(this.innerHTML.length == 3){
+ 				displayText += this.innerHTML + ", ";
+ 				disp.innerHTML = displayText;
+ 				textContainer.removeChild(document.getElementById(this.id));
+ 				tNumber --;
+ 				if(tNumber == 0){
+ 					disp2.innerHTML = "다 찾았슈!! 축하혀~~ 대~ 충"+ Math.round(time) + "초 걸렸구먼";
+ 					clearInterval(k);
+ 				}else{
+ 					disp2.innerHTML = "맞쥬!!" + tNumber+ "개 남아쓔";	
+ 				}
+ 			}else{
+ 				disp2.innerHTML = "고건 아니쥬!";
+ 			}
+ 		}
+
+ 		textContainer.appendChild(d);	
+ 	}
+ 	var time = 0;
+ 	displayText += "("+tNumber+")개 있구먼~ ";
+ 	disp.innerHTML = displayText;
+ 	var k = setInterval(function(){ time += 0.01; clock.innerHTML = time; },10);
+
+ </script>
+</body>
+</html>
